@@ -1,0 +1,55 @@
+:app-id = 073acb22
+:app-key = 5164ae2f452aca8433da2bf95b033883
+:base = https://api.tfl.gov.uk
+
+# GET all BikePoints ?
+GET :base/BikePoint?app_key=:app-key&app_id=:app-id
+
+
+#Search BikePoints
+GET :base/BikePoint/Search?query=stratford&app_key=:app-key&app_id=:app-id
+
+# place types
+GET :base/Place/Meta/PlaceTypes?app_key=:app-key&app_id=:app-id
+
+# blah
+GET :base/Place/Meta/Categories?app_key=:app-key&app_id=:app-id
+
+
+# Get borough around Leyton
+GET :base/Place/Boroughs/At/51.561064/-0.017086?app_key=:app-key&app_id=:app-id
+
+# Waltham Forest
+GET https://api-radon.tfl.gov.uk/Place/Boroughs_00BH
+
+# Kings Cross
+GET https://api.tfl.gov.uk/BikePoint/Search?query=Olympic
+
+
+# 10km sq around leyton
+# [[51.456344939408126 -0.1815393190692659] [51.63620926059187 0.10768651906926587]]
+
+GET :base/Place/?app_key=:app-key&app_id=:app-id&bbBoxpoints.swLat=51.456&bbBoxpoints.swLon=-0.181&bbBoxpoints.neLat=51.636&bbBoxpoints.neLon=0.107
+
+# Get borough around Leyton
+GET :base/Place/Boroughs/At/51.561064/-0.017086?app_key=:app-key&app_id=:app-id
+
+# From the tfl site
+# a
+GET https://api-radon.tfl.gov.uk/BikePoint?swLat=51.5221&swLon=-0.1045&neLat=51.6018&neLon=0.0782&app_id=8268063a&app_key=14f7f5ff5d64df2e88701cef2049c804
+
+# b - gives html back by default?
+GET https://tfl.gov.uk/Stops/BikePoints?neLat=51.6018&neLon=0.0782&swLat=51.5221&swLon=-0.1045
+
+# generated
+
+GET https://api.tfl.gov.uk/BikePoint?swLat=51.5440&swLon=-0.0443&neLat=51.5799&neLon=0.0136&app_id=073acb22&app_key=5164ae2f452aca8433da2bf95b033883
+
+# get by id
+GET :base/BikePoint/BikePoints_786
+
+# my own
+GET http://localhost:3001/bikepoints
+Accept: text/html
+
+
