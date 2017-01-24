@@ -1,3 +1,5 @@
+-*- mode: restclient -*-
+
 :app-id = 073acb22
 :app-key = 5164ae2f452aca8433da2bf95b033883
 :base = https://api.tfl.gov.uk
@@ -5,16 +7,14 @@
 # GET all BikePoints ?
 GET :base/BikePoint?app_key=:app-key&app_id=:app-id
 
-
 #Search BikePoints
 GET :base/BikePoint/Search?query=stratford&app_key=:app-key&app_id=:app-id
 
 # place types
 GET :base/Place/Meta/PlaceTypes?app_key=:app-key&app_id=:app-id
 
-# blah
+# categories
 GET :base/Place/Meta/Categories?app_key=:app-key&app_id=:app-id
-
 
 # Get borough around Leyton
 GET :base/Place/Boroughs/At/51.561064/-0.017086?app_key=:app-key&app_id=:app-id
@@ -24,7 +24,6 @@ GET https://api-radon.tfl.gov.uk/Place/Boroughs_00BH
 
 # Kings Cross
 GET https://api.tfl.gov.uk/BikePoint/Search?query=Olympic
-
 
 # 10km sq around leyton
 # [[51.456344939408126 -0.1815393190692659] [51.63620926059187 0.10768651906926587]]
@@ -48,8 +47,20 @@ GET https://api.tfl.gov.uk/BikePoint?swLat=51.5440&swLon=-0.0443&neLat=51.5799&n
 # get by id
 GET :base/BikePoint/BikePoints_786
 
-# my own
+# us, json
 GET http://localhost:3001/bikepoints
+Accept: application/json
+
+# us, html
+GET http://localhost:3001/bikepoints
+Accept: text/html
+
+# us, json, auth
+GET http://localhost:3001/bikepoints-auth
+Accept: application/json
+
+# us, html, auth
+GET http://localhost:3001/bikepoints-auth
 Accept: text/html
 
 

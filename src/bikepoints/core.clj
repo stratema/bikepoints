@@ -3,20 +3,21 @@
    [cheshire.core :as c]
    [geolocation.core :as g]
    [hiccup.core :as h]
-   [yada.yada :as y])
+   [yada.yada :as y]
+   [aleph.netty :as an])
   (:gen-class))
 
 ;; Config ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (def leyton [51.5619513 -0.0153277])
 
-(def params
+(def config
   {:app-id "073acb22"
    :app-key "5164ae2f452aca8433da2bf95b033883"
    :port 3000
    :base "https://api.tfl.gov.uk/BikePoint"})
 
-;; Utility fns ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Utilities ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn bounding-box [[lat lon] radius]
   (->> radius
@@ -48,7 +49,7 @@
    Returns a sequence of maps comprised of BikePoint id, commonName and NbBikes"
   [coords radius limit]
   (->> (bounding-box coords radius)
-    (mk-nearby-query params)
+    (mk-nearby-query config)
     (fetch)
     (take limit)
     (map #(-> %
@@ -90,4 +91,7 @@
 (defn -main
   [& args]
   (println "Hello, JUXT!")
-  (server (:port params)))
+  (server (:port config))
+  ;; Bit ugly but :wait-for-close doesn't seem to be available even
+  ;; though #115 is closed (in 1.2.1?, but this is not in clojars yet...)
+  @(promise))
